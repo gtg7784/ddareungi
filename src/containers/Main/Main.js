@@ -16,7 +16,7 @@ class Main extends Component{
 
         this.state = {
             onClickState: false,
-            stationData: undefined
+            stationData: []
         }
 
         this.onClickListener = this.onClickListener.bind(this)
@@ -24,9 +24,11 @@ class Main extends Component{
 
     onClickListener(data) {
         this.setState({
-            onClickState: this.state.onClickState === false ? true : false,
-            stationData: JSON.stringify(data)
+            stationData: data,
+            onClickState: this.state.onClickState === false ? true : false
         })
+
+        console.log(this.state.stationData)
     }
 
     componentDidMount() {
@@ -67,7 +69,7 @@ class Main extends Component{
         const { onClickState, stationData } = this.state;
         return (
             <div className={cx('Main')}>
-                <Info display={onClickState === true ? 'flex' : 'none'} data={stationData} />
+                <Info display={onClickState === true ? 'flex' : 'none'} stationID={stationData} />
                 <div className="Map" id="map" />
             </div>
         )

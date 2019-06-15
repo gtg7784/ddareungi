@@ -9,20 +9,26 @@ class Info extends Component{
         super(props);
 
         this.state = {
-            display: this.props.display
+            display: this.props.display,
         }
     }
     componentWillReceiveProps(){
         this.setState({
-            display: this.props.display
+            display: this.props.display,
         })
+        console.log(this.props.data)
     }
 
     render() {
         const { display } = this.state;
+        const { data } = this.props;
+
         return (
             <div className={cx('Info')} style={{'display': `${display}`}}>
-                {this.props.data}
+                STATION ID: {data} <br/>
+                {/* STATION NAME: {data.stationName} <br/>
+                사용 가능 주차장 갯수: {data.rackTotCnt - data.parkingBikeTotCnt} <br/>
+                사용 가능 자전거 갯수: {data.parkingBikeTotCnt} <br/> */}
             </div>
         )
     }
