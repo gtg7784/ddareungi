@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import * as classNames from 'classnames';
 
+import Info from '../../components/Info/Info'
 import markerImg from '../../assets/images/marker.png'
 import data from '../../assets/db/data.json'
 
@@ -10,6 +11,24 @@ import styles from './Main.scss'
 
 const cx = classNames.bind(styles)
 class Main extends Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            onClickState: false,
+            stationData: undefined
+        }
+
+        this.onClickListener = this.onClickListener.bind(this)
+    }
+
+    onClickListener(data) {
+        this.setState({
+            onClickState: this.state.onClickState === false ? true : false,
+            stationData: JSON.stringify(data)
+        })
+    }
+
     componentDidMount() {
         const el = document.getElementById('map');
 
@@ -27,19 +46,28 @@ class Main extends Component{
             minLevel: 4 
         });
 
-        const markers = data.map((data) => (
-            new daum.maps.Marker({
+        const markers = data.map((data) => {
+            const marker = new daum.maps.Marker({
                 position: new daum.maps.LatLng(data.stationLatitude, data.stationLongitude),
                 image: new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
             })
-        ))
+                
+            daum.maps.event.addListener(marker, 'click', () => (
+                this.onClickListener(data)
+            ))
 
+            return marker;
+        })
+        
+        
         clusterer.addMarkers(markers);
     }
 
     render() {
+        const { onClickState, stationData } = this.state;
         return (
             <div className={cx('Main')}>
+                <Info display={onClickState === true ? 'flex' : 'none'} data={stationData} />
                 <div className="Map" id="map" />
             </div>
         )
