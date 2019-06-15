@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import * as classNames from 'classnames';
 
 import Info from '../../components/Info/Info'
-import Search from '../../components/search/search'
+// import Search from '../../components/search/search'
 
 import markerImg from '../../assets/images/marker.png'
 import data from '../../assets/db/data.json'
