@@ -1,0 +1,16 @@
+@import '../../styles/colors';
+
+.header{
+    background-color: $headerBack;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+
+    & > a{
+        & > img{
+            width: 150px;
+        }
+    }
+}
