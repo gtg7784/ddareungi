@@ -1,7 +1,9 @@
+@import '../../styles/colors';
+
 .Info{
     position: absolute;
     display: flex;
-    background-color: #fff;
+    background-color: $colorBack;
     z-index: 1000;
     margin-top: 110px;
     margin-left: 20px;
