@@ -1,6 +1,9 @@
 @import '../../styles/colors';
 
 .header{
+    position: fixed;
+    z-index: 1000;
+    width: calc(100vw - 80px);
     background-color: $headerBack;
     height: 80px;
     display: flex;

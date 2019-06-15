@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import * as classNames from 'classnames';
 
 import Info from '../../components/Info/Info'
+import Search from '../../components/search/search'
+
 import markerImg from '../../assets/images/marker.png'
 import data from '../../assets/db/data.json'
 
@@ -16,20 +18,24 @@ class Main extends Component{
 
         this.state = {
             onClickState: false,
-            stationData: []
+            stationIndex: 0
         }
-
+        
         this.onClickListener = this.onClickListener.bind(this)
     }
 
-    onClickListener(data) {
+    onClickListener(i) {
         this.setState({
-            stationData: data,
+            stationIndex: i,
             onClickState: this.state.onClickState === false ? true : false
         })
 
-        console.log(this.state.stationData)
     }
+
+    handleChange(event) {
+      this.setState({stationSearch: event.target.value});
+    }
+
 
     componentDidMount() {
         const el = document.getElementById('map');
@@ -45,31 +51,29 @@ class Main extends Component{
         const clusterer = new daum.maps.MarkerClusterer({
             map: map,
             averageCenter: true,
-            minLevel: 4 
+            minLevel: 4,
         });
 
-        const markers = data.map((data) => {
+        const markers = data.map((data, i) => {
             const marker = new daum.maps.Marker({
                 position: new daum.maps.LatLng(data.stationLatitude, data.stationLongitude),
                 image: new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
             })
                 
-            daum.maps.event.addListener(marker, 'click', () => (
-                this.onClickListener(data)
-            ))
+            daum.maps.event.addListener(marker, 'click', () => this.onClickListener(i))
 
             return marker;
         })
-        
         
         clusterer.addMarkers(markers);
     }
 
     render() {
-        const { onClickState, stationData } = this.state;
+        const { onClickState, stationIndex } = this.state;
         return (
             <div className={cx('Main')}>
-                <Info display={onClickState === true ? 'flex' : 'none'} stationID={stationData} />
+                {/* <Search/> */}
+                <Info display={onClickState === true ? 'flex' : 'none'} stationIndex={stationIndex} />
                 <div className="Map" id="map" />
             </div>
         )

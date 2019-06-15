@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import * as classnames from 'classnames'
 
+import data from '../../assets/db/data.json'
+
 import styles from './Info.scss'
 const cx = classnames.bind(styles)
 
@@ -9,26 +11,27 @@ class Info extends Component{
         super(props);
 
         this.state = {
-            display: this.props.display,
+            display: this.props.display
         }
     }
     componentWillReceiveProps(){
         this.setState({
             display: this.props.display,
         })
-        console.log(this.props.data)
     }
 
     render() {
         const { display } = this.state;
-        const { data } = this.props;
+        const { stationIndex } = this.props;
 
         return (
-            <div className={cx('Info')} style={{'display': `${display}`}}>
-                STATION ID: {data} <br/>
-                {/* STATION NAME: {data.stationName} <br/>
-                사용 가능 주차장 갯수: {data.rackTotCnt - data.parkingBikeTotCnt} <br/>
-                사용 가능 자전거 갯수: {data.parkingBikeTotCnt} <br/> */}
+            <div className={cx('Info')} style={{ 'display': `${display}` }}>
+                <div>
+                    {data[stationIndex].stationName}
+                    <span>({data[stationIndex].stationId})</span>
+                </div>
+                자전거: {data[stationIndex].rackTotCnt} / {data[stationIndex].parkingBikeTotCnt} <br />
+                n분 뒤에 자전거가 없어질 예정입니다.
             </div>
         )
     }
