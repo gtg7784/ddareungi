@@ -1,0 +1,55 @@
+@import '../../styles/colors';
+
+.Recommand{
+    position: absolute;
+    display: flex;
+    background-color: $colorBack;
+    z-index: 1000;
+    margin-top: 110px;
+    margin-left: 20px;
+    padding: 20px 40px;
+    border-radius: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    overflow-y: scroll;
+    max-height: 300px;
+
+    @media (max-width: 420px){
+        max-height: 160px !important;
+        min-height: 160px !important;
+    }
+    
+    & > ul{
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        list-style: none;
+        max-height: 300px;
+        border-spacing: 5px;
+        margin: 0;
+
+        @media (max-width: 420px){
+            max-height: 160px !important;
+            min-height: 160px !important;
+        }
+
+        & > li{
+            display: flex;
+            margin-bottom: 10px;
+
+            @media ( max-width: 420px){
+                margin-bottom: 25px;
+            }
+            &:last-child{
+                margin-bottom: 20px;
+            }
+
+            & > a{
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    }
+}

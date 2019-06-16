@@ -4,22 +4,21 @@ import React, { Component } from 'react'
 import * as classNames from 'classnames';
 
 import Info from '../../components/Info/Info'
-import Recommand from '../../components/Recommand/Recommand'
+// import Search from '../../components/search/search'
 
 import markerImg from '../../assets/images/marker.png'
 import data from '../../assets/db/data.json'
 
-import styles from './Main.scss'
+import styles from './Mobile.scss'
 
 const cx = classNames.bind(styles)
-class Main extends Component{
+class Mobile extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
             onClickState: false,
-            stationIndex: 0,
-            path: '/'
+            stationIndex: 0
         }
         
         this.onClickListener = this.onClickListener.bind(this)
@@ -39,10 +38,6 @@ class Main extends Component{
 
 
     componentDidMount() {
-        setInterval(() => {
-          this.setState({ path: window.location.pathname });
-        }, 1);
-
         const el = document.getElementById('map');
 
         const map = new daum.maps.Map(el, {
@@ -74,19 +69,15 @@ class Main extends Component{
     }
 
     render() {
-        const { onClickState, stationIndex, path } = this.state;
+        const { onClickState, stationIndex } = this.state;
         return (
-            <div className={cx('Main')}>
-                {
-                    path === '/'
-                        ? <Info display={onClickState === true ? 'flex' : 'none'} stationIndex={stationIndex} />
-                        : <Recommand/>
-                }
-
+            <div className={cx('Mobile')}>
+                {/* <Search/> */}
+                <Info display={onClickState === true ? 'flex' : 'none'} stationIndex={stationIndex} />
                 <div className="Map" id="map" />
             </div>
         )
     }
 }
 
-export default Main;
+export default Mobile;

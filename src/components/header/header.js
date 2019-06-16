@@ -6,14 +6,35 @@ import logo from '../../assets/images/logo.png'
 const cx = classNames.bind(styles)
 
 class Header extends Component {
-    render(){
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            path: '/'
+        }
+    }
+  
+    componentDidMount() {
+      setInterval(() => {
+        this.setState({ path: window.location.pathname });
+      }, 1);
+    }
+
+    render() {
+        const { path } = this.state;
         return (
             <header className={cx('header')}>
                 <a href="/">
                     <img src={logo} alt=""/>
                 </a>
                 <ul>
-                    {/* <li></li> */}
+                    {
+                        (path === '/' || path === '/path')
+                            ? <>
+                                <li><a href="/recommand">Recommand</a></li>
+                            </>
+                            : ''
+                    }
                 </ul>
             </header>
         );

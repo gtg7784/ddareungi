@@ -31,7 +31,7 @@ class Info extends Component{
                     <span>({data[stationIndex].stationId})</span>
                 </div>
                 자전거: {data[stationIndex].rackTotCnt} / {data[stationIndex].parkingBikeTotCnt} <br />
-                n분 뒤에 자전거가 없어질 예정입니다.
+                10분 뒤에 자전거가 없어질 예정입니다.
             </div>
         )
     }
